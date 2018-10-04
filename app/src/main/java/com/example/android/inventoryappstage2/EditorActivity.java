@@ -41,7 +41,7 @@ public class EditorActivity extends AppCompatActivity implements
     private EditText mNameEditText;
 
     private EditText mPriceEditText;
-       private EditText mQuantityEditText;
+    private EditText mQuantityEditText;
 
     private EditText mSupplierNameEditText;
 
@@ -165,12 +165,12 @@ public class EditorActivity extends AppCompatActivity implements
 
         // Check if this is supposed to be a new item
         // and check if all the fields in the editor are blank
-        if (TextUtils.isEmpty(nameString) && TextUtils.isEmpty(priceString)) {
+        if (TextUtils.isEmpty(nameString) || TextUtils.isEmpty(supplierNameString)) {
             // If the not complete not save items
             Toast.makeText(this, getString(R.string.editor_insert_item_not_save),
                     Toast.LENGTH_SHORT).show();
             return;
-        }else if (TextUtils.isEmpty(quantityString) && TextUtils.isEmpty(supplierNameString)) {
+        }else if (TextUtils.isEmpty(quantityString) || TextUtils.isEmpty(priceString)) {
             // If the not complete not save items
             Toast.makeText(this, getString(R.string.editor_insert_item_not_save),
                     Toast.LENGTH_SHORT).show();
@@ -182,9 +182,19 @@ public class EditorActivity extends AppCompatActivity implements
             return;
         }
 
-        int price = Integer.parseInt(priceString);
-        int quantity = Integer.parseInt(quantityString);
-        int supplierNumber = Integer.parseInt(supplierNumberString);
+        int price = 0;
+        int quantity = 0;
+        int supplierNumber = 0;
+
+        try {
+            price = Integer.parseInt(priceString);
+            quantity = Integer.parseInt(quantityString);
+            supplierNumber = Integer.parseInt(supplierNumberString);
+        } catch (NumberFormatException e){
+            Toast.makeText(this, getString(R.string.editor_insert_item_successful),
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         // Create a ContentValues object where column names are the keys,
         // and item attributes from the editor are the values.
@@ -230,6 +240,8 @@ public class EditorActivity extends AppCompatActivity implements
                         Toast.LENGTH_SHORT).show();
             }
         }
+        // Exit activity
+        finish();
     }
 
     @Override
@@ -260,8 +272,6 @@ public class EditorActivity extends AppCompatActivity implements
             case R.id.action_save:
                 // Save item to database
                 saveItem();
-                // Exit activity
-                finish();
                 return true;
             // Respond to a click on the "Delete" menu option
             case R.id.action_delete:

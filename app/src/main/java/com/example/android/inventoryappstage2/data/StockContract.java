@@ -11,7 +11,7 @@ public final class StockContract {
     private StockContract() {
     }
 
-    public static final String CONTENT_AUTHORITY = "com.example.android.inventoryappstage1";
+    public static final String CONTENT_AUTHORITY = "com.example.android.inventoryappstage2";
 
 
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
