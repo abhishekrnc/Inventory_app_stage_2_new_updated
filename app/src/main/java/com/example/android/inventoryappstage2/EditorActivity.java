@@ -191,7 +191,7 @@ public class EditorActivity extends AppCompatActivity implements
             quantity = Integer.parseInt(quantityString);
             supplierNumber = Integer.parseInt(supplierNumberString);
         } catch (NumberFormatException e){
-            Toast.makeText(this, getString(R.string.editor_insert_item_successful),
+            Toast.makeText(this, getString(R.string.input_not_a_number),
                     Toast.LENGTH_SHORT).show();
             return;
         }

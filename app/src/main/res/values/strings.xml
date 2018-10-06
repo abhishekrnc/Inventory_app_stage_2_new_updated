@@ -121,5 +121,6 @@
     <!-- Label for the item's breed if the item is unknown [CHAR LIMIT=20] -->
     <string name="item_unknown">Unknown item</string>
     <string name="title_activity_info">InfoActivity</string>
+    <string name="input_not_a_number">input_not_a_number</string>
 
 </resources>
